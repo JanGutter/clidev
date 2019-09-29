@@ -33,13 +33,13 @@ scan_envs () {
 }
 
 list_envs () {
-    echo Environments available
+    printf "%-20s : %s\n" "Environment" "Description"
     echo ----------------------
     for i in ${ENVS[@]}; do
         local conf_override="${i}/devcli-conf.sh"
         unset DESCRIPTION
         [ -x "$conf_override" ] && source $conf_override
-        echo $(basename $i) : $DESCRIPTION
+        printf "%-20s : %s\n" $(basename $i) "$DESCRIPTION"
     done
     exit 0
 }

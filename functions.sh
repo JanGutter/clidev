@@ -82,6 +82,10 @@ run_image () {
         run_cmd+=(-v)
         run_cmd+=(${i})
     done
+    for i in ${TMPFS[@]}; do
+        run_cmd+=(--tmpfs)
+        run_cmd+=(${i})
+    done
     run_cmd+=("$imagename")
     run_cmd+=("$ENTRYPOINT")
     ${run_cmd[@]}

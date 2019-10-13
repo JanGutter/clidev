@@ -16,6 +16,7 @@ fi
 
 ENVS=()
 MOUNTS=()
+TMPFS=()
 source config.sh
 source functions.sh
 check_config

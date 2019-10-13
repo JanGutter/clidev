@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 ###########################
-# Functions for devcli.sh #
+# Functions for clidev.sh #
 ###########################
 
 die () {
@@ -12,12 +12,12 @@ die () {
 }
 
 check_config () {
-    [ -d "$DEVCLI_CONF_D" ] || die DEVCLI_CONF_D directory not found
-    [ -d "$DEVCLI_ENVS" ] || die DEVCLI_ENVS directory not found
+    [ -d "$CLIDEV_CONF_D" ] || die CLIDEV_CONF_D directory not found
+    [ -d "$CLIDEV_ENVS" ] || die CLIDEV_ENVS directory not found
 }
 
 load_config () {
-    for I in "$DEVCLI_CONF_D"/*.sh; do
+    for I in "$CLIDEV_CONF_D"/*.sh; do
         if [ -x "$I" ]; then
             source "$I"
         fi
@@ -25,7 +25,7 @@ load_config () {
 }
 
 scan_envs () {
-    for i in "$DEVCLI_ENVS"/*; do
+    for i in "$CLIDEV_ENVS"/*; do
         if [ -d "$i" ]; then
             ENVS+=($i)
         fi
@@ -36,7 +36,7 @@ list_envs () {
     printf "%-20s : %s\n" "Environment" "Description"
     echo ----------------------
     for i in ${ENVS[@]}; do
-        local conf_override="${i}/devcli-conf.sh"
+        local conf_override="${i}/clidev-conf.sh"
         unset DESCRIPTION
         [ -x "$conf_override" ] && source $conf_override
         printf "%-20s : %s\n" $(basename $i) "$DESCRIPTION"
@@ -58,9 +58,9 @@ in_array() {
 
 build_image () {
     IMAGE=$1
-    ENVPATH="${DEVCLI_ENVS}/$IMAGE"
+    ENVPATH="${CLIDEV_ENVS}/$IMAGE"
     in_array ENVS "$ENVPATH" || die $ENVPATH not found
-    local conf_override="${ENVPATH}/devcli-conf.sh"
+    local conf_override="${ENVPATH}/clidev-conf.sh"
     [ -x "$conf_override" ] && source $conf_override
     local imagename="${NAMESPACE}/${IMAGE}:${TAG}"
     local build_cmd=("${BUILD_CMD[@]}")
@@ -72,9 +72,9 @@ build_image () {
 
 run_image () {
     IMAGE=$1
-    ENVPATH="${DEVCLI_ENVS}/$IMAGE"
+    ENVPATH="${CLIDEV_ENVS}/$IMAGE"
     in_array ENVS "$ENVPATH" || die $ENVPATH not found
-    local conf_override="${ENVPATH}/devcli-conf.sh"
+    local conf_override="${ENVPATH}/clidev-conf.sh"
     [ -x "$conf_override" ] && source $conf_override
     local imagename="${NAMESPACE}/${IMAGE}:${TAG}"
     local run_cmd=("${RUN_CMD[@]}")

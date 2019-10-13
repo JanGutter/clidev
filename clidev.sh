@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 ###########################################################################
-# devcli.sh: a thin wrapper around docker to help manage multiple CLI dev #
+# clidev.sh: a thin wrapper around docker to help manage multiple CLI dev #
 # environments                                                            #
 ###########################################################################
 
@@ -27,7 +27,7 @@ usage () {
     cat << '    EOF' | sed 's/^        //'
         Syntax
         ------
-        ./devcli.sh command [args]
+        ./clidev.sh command [args]
 
         command
         -------

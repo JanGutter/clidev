@@ -7,10 +7,10 @@
 ####################################################
 
 # Directory where the global configs reside
-DEVCLI_CONF_D=${DEVCLI_CONF_D:-../devcli-conf/conf.d}
+CLIDEV_CONF_D=${CLIDEV_CONF_D:-../clidev-conf/conf.d}
 
 # Directory where the container environments reside
-DEVCLI_ENVS=${DEVCLI_ENVS:-../devcli-conf/env}
+CLIDEV_ENVS=${CLIDEV_ENVS:-../clidev-conf/env}
 
 # Defaults that can be overridden here or per environment config:
 
